@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-
+from tags import views as tags_views
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^$',tags_views.home_page,name = 'home'), 
+    #url(r'^admin/', admin.site.urls),
 ]
