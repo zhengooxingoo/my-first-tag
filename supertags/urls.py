@@ -1,3 +1,4 @@
+#coding:utf-8
 """supertags URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -17,6 +18,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from tags import views as tags_views
 urlpatterns = [
-    url(r'^$',tags_views.home_page,name = 'home'), 
+    # 主页面
+    url(r'^$',tags_views.index, name='index'),
+    # 创建词云
+    url(r'^wordcloud/create/$', tags_views.wordcloud_create, name='wordcloud.create'),
+    url(r'^shape/img/(.+)/$', tags_views.shape_img, name='shape.img'),
     #url(r'^admin/', admin.site.urls),
 ]

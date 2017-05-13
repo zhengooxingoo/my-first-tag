@@ -5,7 +5,21 @@ from django.test import TestCase
 from django.core.urlresolvers import resolve
 from tags.views import home_page
 from django.http import HttpRequest
+from django.template.loader import render_to_string
+import re
+from tags.models import Fonts
+
 class HomePageTest(TestCase):
+    def remove_csrf(self,html_code):
+        csrf_regex = r'<input[^>]+csrfmiddlewaretoken[^>]+>'
+        return re.sub(csrf_regex, '', html_code)
+
+    def assertEqualExceptCSRF(self, html_code1, html_code2):
+        return self.assertEqual(
+            self.remove_csrf(html_code1),
+            self.remove_csrf(html_code2)
+        )
+        
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
         self.assertEqual(found.func , home_page)
@@ -14,7 +28,18 @@ class HomePageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
-        self.assertTrue(response.content.startswith(b'<html>'))
-        title_b='<title>中文标签云</title>'.encode('utf-8')
-        self.assertIn(title_b,response.content)
-        self.assertTrue(response.content.endswith(b'</html>'))
+        expected_html = render_to_string('home.html')
+        self.assertEqualExceptCSRF(response.content.decode(),expected_html)
+        
+        
+    def test_home_page_can_save_a_POST_request(self):
+        request = HttpRequest()
+        request.method ='POST'
+        request.POST['keywords_text']=u'人民的名义'
+        
+        response = home_page(request)
+        self.assertIn(u'反腐',response.content.decode()) 
+        
+        
+
+

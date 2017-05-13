@@ -1,3 +1,4 @@
+#coding:utf-8
 """
 Django settings for supertags project.
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tags',
 ]
 
 MIDDLEWARE = [
@@ -118,3 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# 当运行 python manage.py collectstatic 的时候
+# STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
+# 把这些文件放到一起是为了用apache等部署的时候更方便
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
