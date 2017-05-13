@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>WordCloud</title>
+		<link rel="stylesheet" href="/static/layui/css/layui.css" />
+        <style>
+            *{padding: 0px;margin: 0px;}.div-line{margin-bottom: 10px;}
+            .div-show {
+                display: inline-block;
+                border: 1px dashed grey;
+                float: left;
+                width: 700px;
+                height: 600px;
+                margin-left: 100px;
+            }
+            .input-style {
+                width: 200px;
+                margin-left: 10px;
+                display: inline-block;
+            }
+            .label-style {
+                width: 100px;
+                display: inline-block;
+            }
+            input[type='color']{
+                width: 50px;
+                margin-left: 10px;
+            }
+            #shapeImg{
+                background: url() no-repeat center;
+                background-size: cover;
+                width: 100px;
+                height: 100px;
+                border: 1px solid #ddd;
+                margin-left: 115px;
+            }            
+        </style>
+    </head>
+    <body>
+        <ul class="layui-nav">
+            <li class="layui-nav-item" style="font-size: 24px;float: left">词云生成器</li>
+            <li class="layui-nav-item" style="float: right">作者：sugar_town</li>
+            <div style="clear: both"></div>
+        </ul>
+        <div style="margin: 15px;">
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>说明</legend>
+            </fieldset>
+            <blockquote class="layui-elem-quote">本软件后端使用基于Python的Django框架制作,前端使用LayUI框架</blockquote>
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>功能</legend>
+            </fieldset>
+         
+            <div style="display: inline-block; float: left">
+                <div class="data-keywords div-line">
+                    <label class="label-style">搜索关键词</label>
+                    <input id="input-keywords" name="title" lay-verify="title"
+                           autocomplete="off" placeholder="例如:人民的名义"
+                           class="layui-input input-style" type="text">
+                </div>
+                <div class="data-bgcolor div-line">
+                    <label class="label-style">背景颜色</label>
+                    <input type="color" name="title" lay-verify="title" value="#000000" id="input-bgcolor">
+                    <!-- <div class="layui-input-inline" style="width: 200px; margin-left: 10px">
+                        <select name="title" lay-verify="title" id="input-bgcolor">
+                            <option value="black" selected="">黑色</option>
+                            <option value="white">白色</option>
+                            <option value="pink">粉色</option>
+                        </select>
+                    </div> -->
+                </div>
+                <div class="data-bgcolor div-line">
+                    <label class="label-style">字体颜色</label>
+                    <div class="layui-input-inline" style="width: 200px; margin-left: 10px">
+                        <select name="title" lay-verify="title" id="input-fontColor">
+                            <option value="0" selected="">默认颜色</option>
+                            <option value="1">图片颜色（请选择有颜色的形状图片）</option>
+                            <option value="2">中性颜色</option>
+                        </select>
+                    </div> -->
+                </div>
+                <div class="data-bgcolor div-line">
+                    <label class="label-style">字体</label>
+                    <div class="layui-input-inline" style="width: 200px; margin-left: 10px">
+                        <select name="title" lay-verify="title" id="input-fontStyle">
+                            <option value="FZZY.TTF">方正准圆</option>
+                            <option value="FZYXJT.ttf">方正幼线简体</option>
+                            <option value="FZZQ.ttf">方正中倩</option>                            
+                            <option value="FZLTKH.ttf">方正兰亭刊黑</option>
+                            <option value="FZZDHJW.TTF">方正正大黑</option>
+                            <option value="FZSTK.TTF">方正舒体</option>
+                            <option value="FZYTK.TTF">方正姚体</option>                            
+                            <option value="FZYDTH.ttf">方正韵动特黑</option>
+                            <option value="FZZZHJT.TTF">方正正准黑简体</option>
+                            <option value="FZZYJT.ttf">方正稚艺简体</option>
+                            <option value="FZZBHJT.ttf">方正毡笔黑简体</option>
+                            <option value="FZNHT.TTF">方正呐喊体</option>
+                            <option value="FZSE.ttf">方正少儿</option>
+                            <option value="simsun.ttc">宋体</option>                            
+                            <option value="simfang.ttf">仿宋</option>
+                            <option value="simsun.ttc">新宋体</option>                            
+                            <option value="simhei.ttf">黑体</option>
+                            <option value="msyh.ttc">微软雅黑</option>                            
+                            <option value="SIMYOU.TTF">幼圆</option>  
+                            <option value="simkai.ttf">楷体</option>
+                            <option value="SIMLI.TTF">隶书</option> 
+                            <option value="HiraginoSansGBW3.ttf">冬青黑体</option>  
+                            <option value="NotoSansHans-DemiLight.otf" selected="">思源黑体</option>                                                                    
+                            <option value="STCAIYUN.TTF">华文彩云</option>
+                            <option value="STFANGSO.TTF">华文仿宋</option>
+                            <option value="STXINGKA.TTF">华文行楷</option>
+                            <option value="STHUPO.TTF">华文琥珀</option>
+                            <option value="STKAITI.TTF">华文楷体</option>
+                            <option value="STLITI.TTF">华文隶书</option>
+                            <option value="STSONG.TTF">华文宋体</option>
+                            <option value="STXIHEI.TTF">华文细黑</option>
+                            <option value="STXINWEI.TTF">华文新魏</option>
+                            <option value="STZHONGS.TTF">华文中宋</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="data-bgcolor div-line">
+                    <label class="label-style">形状</label>
+                    <div class="layui-input-inline" style="width: 200px; margin-left: 10px">
+                        <select name="title" lay-verify="title" id="input-shapes">
+                            <option value="alice.png">color_alice</option>
+                            <option value="pikachu.png" selected="">color_picashu</option>
+                            
+                            <option value="paw.png" selected="">paw</option>
+                            <option value="heart.png">heart</option>
+                            <option value="star.png">star</option>
+                            <option value="cloud.png">cloud</option>
+                            
+                            <option value="child.png">child</option>                          
+                            <option value="male.png">male</option>
+                            <option value="female.png">female</option>
+                            
+                            <option value="bus.png">bus</option>
+                            <option value="car.png">car</option>
+                            <option value="plane.png">plane</option>
+                            
+                            <option value="thumbs-up.png">thumbs-up</option>
+                            <option value="thumbs-down.png">thumbs-down</option>
+                            <option value="frown-o.png">frown-o</option>
+                            <option value="meh-o.png">meh</option>
+                            <option value="smile-o.png">smile</option>
+                            <option value="snowflake-o.png">snowflake</option>
+                            
+                            <option value="beer.png">beer</option>
+                            <option value="coffee.png">coffee</option>
+ 
+                            <option value="euro.png">euro</option>            
+                            <option value="camera.png">camera</option>
+                            <option value="music.png">music</option>
+                            <option value="paint-brush.png">paint-brush</option>
+                            <option value="certificate.png">certificate</option>
+                            <option value="graduation-cap.png">graduation-cap</option>
+                            
+                            <option value="qq.png">qq</option>
+                            <option value="apple.png">apple</option>
+                            <option value="battery-4.png">battery</option>
+                            <option value="bug.png">bug</option>     
+                            <option value="comment.png">comment</option>                       
+
+                            <option value="bell.png">bell</option>
+                            <option value="bomb.png">bomb</option>
+                            <option value="flag.png">flag</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="data-bgcolor div-line">
+                    <!-- 形状预览 -->
+                    <div id="shapeImg" class="layui-input-inline" style="background-image: url('shape/img/paw.png');"></div>
+                </div>
+                <div class="data-maxwords div-line">
+                    <label class="label-style">最大词数</label>
+                    <input id="input-maxwords" name="title" lay-verify="title"
+                           autocomplete="off" placeholder="例如:100"
+                           class="layui-input input-style" type="text" value="150">
+                </div>
+                <button id="button-confirm" class="layui-btn">生成词云</button>
+            </div>
+            <div id="show-pic" class="div-show">
+                <img src="/static/temp.png" width="600px" height="600px">
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="layui-progress">
+            <div class="layui-progress-bar" lay-percent="10%"></div>
+        </div>
+        <script src="/static/layui/layui.js"></script>
+        <script>
+            layui.use(['layer','element'], function() {
+                var $ = layui.jquery,
+                    laypage = layui.laypage,
+                    layer = layui.layer,
+                    element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块；
+                    
+                // 预览选中的形状
+                var shapeImg = $('#shapeImg');
+                $('#input-shapes').on('change',function(){
+                    shapeImg.css('background-image',"url('shape/img/"+this.value+"')");
+                });
+                
+
+                $('#button-confirm').on('click', function() {
+                    var status = parent.layer.load(0, {shade: 0.3});
+
+                    var keywords = $('#input-keywords').val();//关键词
+                    var bgcolor = $('#input-bgcolor').val();//背景色
+                    var maxwords = $('#input-maxwords').val();//最大词数
+                    var fontColor = $('#input-fontColor').val();//字体颜色
+                    var fontStyle = $('#input-fontStyle').val();//字体
+                    var shapes = $('#input-shapes').val();//形状
+
+                    var params = 'keywords=' + keywords + '&' +
+                                 'bgcolor='  + bgcolor + '&' +
+                                 'fontColor='  + fontColor + '&' +
+                                 'fontStyle='  + fontStyle + '&' +
+                                 'shapes='  + shapes + '&' +
+                                 'maxwords=' + maxwords + '&';
+
+                    $.ajax({
+                        type: 'post',
+                        url: '/wordcloud/create/',
+                        data: params,
+                        success: function (data) {
+                            $('#show-pic').html(data);
+                            parent.layer.close(status);
+                        },
+                        error: function (data) {
+                            $('#show-pic').html(data);
+                            parent.layer.close(status);
+                        }
+                    });
+                    //<img src="/static/images/alice_color.png"/>
+                    //parent.layer.alert($('#input-keywords').val());
+                });
+
+            });
+        </script>
+    </body>
+</html>

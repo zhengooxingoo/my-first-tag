@@ -1,0 +1,21 @@
+FZLTCXHJW.TTF  方正兰亭超细黑简体 常规
+FZSTK.TTF 方正舒体 常规
+FZYTK.TTF 方正姚体 常规
+simfang.ttf 仿宋 常规
+simhei.ttf 黑体 常规
+STCAIYUN.TTF 华文彩云 常规
+STFANGSO.TTF 华文仿宋 常规
+STXINGKA.TTF 华文行楷 常规
+STHUPO.TTF 华文琥珀 常规
+STKAITI.TTF 华文楷体 常规
+STLITI.TTF 华文隶书 
+STSONG.TTF 华文宋体
+STXIHEI.TTF 华文细黑
+STXINWEI.TTF 华文新魏
+STZHONGS.TTF 华文中宋
+simkai.ttf 楷体
+SIMLI.TTF 隶书
+simsun.ttc 宋体
+msyh.ttc 微软雅黑
+simsun.ttc 新宋体
+SIMYOU.TTF 幼圆
