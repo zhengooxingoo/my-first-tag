@@ -21,16 +21,16 @@ class Keywords(object):
     
     def tf_idf(self):
         
-        #jieba.load_userdict(os.path.abspath(".") + "/tags/material/userdict.txt")
-        jieba.load_userdict("/home/zxingoo/supertags/tags/material/userdict.txt")
+        jieba.load_userdict(os.path.abspath(".") + "/tags/material/userdict.txt")
+        #jieba.load_userdict("/home/zxingoo/supertags/tags/material/userdict.txt")
         #jieba.suggest_freq("达康书记", tune = True)
         #jieba.suggest_freq("人民的名义", tune = True)       
         
         seg_list = jieba.cut(self.txt, cut_all=False)
 
    
-        #stopwords_filename = os.path.abspath(".")+"/tags/material/stopwords.txt"  # stopwords
-        stopwords_filename = "/home/zxingoo/supertags/tags/material/stopwords.txt"
+        stopwords_filename = os.path.abspath(".")+"/tags/material/stopwords.txt"  # stopwords
+        #stopwords_filename = "/home/zxingoo/supertags/tags/material/stopwords.txt"
         stopwords = {}
         f = open(stopwords_filename, 'r')
         line = f.readline().rstrip()
@@ -45,8 +45,8 @@ class Keywords(object):
         seg_list = [i for i in seg_list if i not in stopwords]
         tmp_list = "/".join(seg_list).encode("utf-8")
 
-        #combinewords_filename = os.path.abspath(".")+"/tags/material/combinewords.txt"  # combine_dict
-        combinewords_filename = "/home/zxingoo/supertags/tags/material/combinewords.txt"
+        combinewords_filename = os.path.abspath(".")+"/tags/material/combinewords.txt"  # combine_dict
+        #combinewords_filename = "/home/zxingoo/supertags/tags/material/combinewords.txt"
         combine_dict = {}
         for line in open(combinewords_filename, "r"):
             seperate_word = line.strip().split("\t")
@@ -86,7 +86,7 @@ class Keywords(object):
         #return w
 
 if __name__ == "__main__":
-    file_path ="/home/zxingoo/supertags/tags/temp/tmp.txt"
+    #file_path ="/home/zxingoo/supertags/tags/temp/tmp.txt"
     with open(file_path, 'r')as f:
         lines=f.readlines()
     txt = u''.join(lines)
